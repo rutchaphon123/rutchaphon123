@@ -1,5 +1,7 @@
 Hi 👋 My name is Rutchaphon Kidkarn
-===================================* 🌍  I'm based in Chaiyaphoom* 🖥️  See my portfolio at [CarCounting Project](http://github.com/rutchaphon123/CarCounting)
+===================================
+* 🌍  I'm based in Chaiyaphoom
+* 🖥️  See my portfolio at [CarCounting Project](http://github.com/rutchaphon123/CarCounting)
 
 ### Skills
 
