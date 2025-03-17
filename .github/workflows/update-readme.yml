@@ -2,7 +2,7 @@ name: Update README with Recent Repos
 
 on:
   schedule:
-    - cron: '0 0 * * *' # เที่ยงคืนทุกวัน
+    - cron: '0 0 * * *'  # เที่ยงคืนทุกวัน
   workflow_dispatch:
 
 jobs:
@@ -24,7 +24,7 @@ jobs:
             echo "  <li>$line</li>" >> new_recent.md
           done < recent_repos.md
           echo "</ul>" >> new_recent.md
-          sed -i '/<ul id="recent-projects">/,/<\/ul>/c\'"$(cat new_recent.md)" README.md
+          perl -0777 -i -pe 's|<ul id="recent-projects">.*?</ul>|'"$(cat new_recent.md)"'|gs' README.md
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v5
