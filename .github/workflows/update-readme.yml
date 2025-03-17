@@ -2,34 +2,29 @@ name: Update README with Recent Repos
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # เที่ยงคืนทุกวัน
-  workflow_dispatch:       # สามารถรันด้วยตัวเองได้
+    - cron: '0 0 * * *'  # ทุกวันเวลาเที่ยงคืน
+  workflow_dispatch:
 
 jobs:
   update-readme:
     runs-on: ubuntu-latest
     steps:
-      # ดึง Repository ลงมา
       - uses: actions/checkout@v4
 
-      # ติดตั้ง Node.js
       - uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      # ใช้ curl และ jq เพื่อดึงชื่อ repo ล่าสุดที่มี push events
       - name: Fetch recent repos
         run: |
           curl -s "https://api.github.com/users/rutchaphon123/events/public" \
-          | jq '[.[] | select(.type=="PushEvent")] | unique_by(.repo.name) | .[:3] | map("- [\(.repo.name)](https://github.com/\(.repo.name))") | join("\n")' \
+          | jq -r '[.[] | select(.type=="PushEvent")] | unique_by(.repo.name) | .[:3][] | "- [\(.repo.name)](https://github.com/\(.repo.name))"' \
           > recent_repos.md
 
-      # อัปเดต README.md โดยการแทนที่ข้อมูลระหว่าง <ul id="recent-projects"> กับ </ul>
       - name: Update README
         run: |
-          sed -i '/<ul id="recent-projects">/,/<\/ul>/c\<ul id="recent-projects">\n'"$(cat recent_repos.md)"'\n</ul>' README.md
+          sed -i '/<ul id="recent-projects">/,/<\/ul>/c\<ul id="recent-projects">\n'"$(sed 's/^/- /' recent_repos.md | sed 's/^- /<li>/;s/$/<\/li>/")"'\n</ul>' README.md
 
-      # Commit และ Push การเปลี่ยนแปลงขึ้น GitHub อัตโนมัติ
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
