@@ -1,1 +1,0 @@
-"- [rutchaphon123/paperfox](https://github.com/rutchaphon123/paperfox)\n- [rutchaphon123/rutchaphon123](https://github.com/rutchaphon123/rutchaphon123)"
