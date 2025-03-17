@@ -2,7 +2,7 @@ name: Update README with Recent Repos
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # เที่ยงคืนทุกวัน
+    - cron: '0 0 * * *'  # ทุกวันเวลาเที่ยงคืน
   workflow_dispatch:
 
 jobs:
@@ -13,8 +13,8 @@ jobs:
 
       - name: Fetch recent repos
         run: |
-          curl -s "https://api.github.com/users/rutchaphon123/events/public" \
-          | jq -r '[.[] | select(.type=="PushEvent")] | unique_by(.repo.name) | .[:3][] | "[\(.repo.name)](https://github.com/\(.repo.name))"' \
+          curl -s "https://api.github.com/users/rutchaphon123/repos?sort=pushed&direction=desc" \
+          | jq -r '.[0:3][] | "[\(.full_name)](\(.html_url))"' \
           > recent_repos.md
 
       - name: Update README
