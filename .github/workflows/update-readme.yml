@@ -23,7 +23,9 @@ jobs:
 
       - name: Update README
         run: |
-          sed -i '/<ul id="recent-projects">/,/<\/ul>/c\<ul id="recent-projects">\n'"$(sed 's/^/- /' recent_repos.md | sed 's/^- /<li>/;s/$/<\/li>/")"'\n</ul>' README.md
+          content=$(cat recent_repos.md | sed 's/^/- /')
+          sed -i '/<ul id="recent-projects">/,/<\/ul>/c\<ul id="recent-projects">\n'"$(echo "$content" | sed 's/^/<li>/;s/$/<\/li>/')"\n'</ul>' README.md
+
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v5
