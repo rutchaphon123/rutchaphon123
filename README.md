@@ -11,6 +11,8 @@
       <p>ชื่อ นายรัชพล คิดการ (ฟาร์) สนใจการสร้างสรรค์โปรเจ็คที่ดีและได้ฝึกทักษะของตัวเอง ตอนนี่เกำลังทำงานด้าน Data analyst และเรียนรู้ Data engineer ไปพร้อม ๆ กัน ยังเป็นเด็กจบใหม่ทำงานยังไม่ถึงปีและยังต้องการเรียนรู้เรื่อย ๆ </p>
       <h3>โปรเจ็คล่าสุด</h3>
 <ul id="recent-projects">
+  <li>[rutchaphon123/paperfox](https://github.com/rutchaphon123/paperfox)</li>
+  <li>[rutchaphon123/rutchaphon123](https://github.com/rutchaphon123/rutchaphon123)</li>
 </ul>
       <h3>หนังสือที่ชอบ</h3>
       <ul>
