@@ -12,6 +12,7 @@
       - Javascript freeCodeCamp
     </td>
     <td>
+      ![chunli-streetfighter-movie-hello](https://github.com/user-attachments/assets/3057b273-9a66-4569-bf6d-226a59159f06)
       <img src="https://i.pinimg.com/originals/2f/f0/ca/2ff0ca6f9152fae4626610c9561b4e73.gif" alt="my waifu" width="200px">
       <p align="center">Chun Li Waifu forever</p>
     </td>
