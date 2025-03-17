@@ -2,7 +2,7 @@ name: Update README with Recent Repos
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # ทุกวันเวลาเที่ยงคืน
+    - cron: '0 0 * * *' # เที่ยงคืนทุกวัน
   workflow_dispatch:
 
 jobs:
@@ -11,21 +11,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
       - name: Fetch recent repos
         run: |
           curl -s "https://api.github.com/users/rutchaphon123/events/public" \
-          | jq -r '[.[] | select(.type=="PushEvent")] | unique_by(.repo.name) | .[:3][] | "- [\(.repo.name)](https://github.com/\(.repo.name))"' \
+          | jq -r '[.[] | select(.type=="PushEvent")] | unique_by(.repo.name) | .[:3][] | "[\(.repo.name)](https://github.com/\(.repo.name))"' \
           > recent_repos.md
 
       - name: Update README
         run: |
-          content=$(cat recent_repos.md | sed 's/^/- /')
-          sed -i '/<ul id="recent-projects">/,/<\/ul>/c\<ul id="recent-projects">\n'"$(echo "$content" | sed 's/^/<li>/;s/$/<\/li>/')"\n'</ul>' README.md
-
+          echo "<ul id=\"recent-projects\">" > new_recent.md
+          while read line; do
+            echo "  <li>$line</li>" >> new_recent.md
+          done < recent_repos.md
+          echo "</ul>" >> new_recent.md
+          sed -i '/<ul id="recent-projects">/,/<\/ul>/c\'"$(cat new_recent.md)" README.md
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v5
